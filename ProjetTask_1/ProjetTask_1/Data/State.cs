@@ -2,6 +2,7 @@
 {
     internal class State
     {
+        public int id { get; set; }
         public Catalog Book { get; }
         public bool Available = true;
 

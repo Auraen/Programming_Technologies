@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjetTask_2.DataLayer;
+﻿using ProjetTask_2.DataLayer;
 
 namespace ProjetTask_2.LogicLayer
 {
@@ -16,6 +11,13 @@ namespace ProjetTask_2.LogicLayer
         public BusinessLogicAPI(AbstractDataAPI dataAPI)
         {
             this.dataAPI = dataAPI;
+            service = new DataService(this);
+            dataContext = new DataContext();
+        }
+
+        public BusinessLogicAPI()
+        {
+            dataAPI = AbstractDataAPI.createAPI();
             service = new DataService(this);
             dataContext = new DataContext();
         }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using View.Model;
-using View.Services;
 using View.ViewModels;
-using View.Stores;
 using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;

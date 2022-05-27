@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using ProjetTask_2.LogicLayer;
 
@@ -18,7 +16,7 @@ namespace View.Model
 
         public library()
         {
-            businessLogicAPI = new BusinessLogicAPI(new DataAPI());
+            businessLogicAPI = new BusinessLogicAPI();
             _actions = new List<action>();
             _stock = new List<state>();
             _users = new List<person>();

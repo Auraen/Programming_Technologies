@@ -8,9 +8,8 @@ namespace ProjetTask_2.DataLayer
 {
     public abstract class AbstractDataAPI
     {
-
         private DataContext dataContext = new DataContext();
-        
+
         private List<catalog> catalogs = new List<catalog>();
         private List<state> states = new List<state>();
         private List<person> users = new List<person>();
@@ -27,7 +26,12 @@ namespace ProjetTask_2.DataLayer
             dataContext.SubmitChanges();
         }
 
-            /*Search a catalog id by its title and author*/
+        public static AbstractDataAPI createAPI()
+        {
+            return new DataLayer.DataAPI();
+        }
+        
+        /*Search a catalog id by its title and author*/
         private int searchCatalog(string title, string author)
         {
             foreach (catalog c in catalogs)
@@ -45,7 +49,8 @@ namespace ProjetTask_2.DataLayer
             if (available)
             {
                 truefalse = 1;
-            } else
+            }
+            else
             {
                 truefalse = 0;
             }
@@ -138,7 +143,7 @@ namespace ProjetTask_2.DataLayer
         public void newAddBook(String Title, String Author, int Quantity)
         {
             int id = searchCatalog(Title, Author);
-            
+
             if (id == -1)
             {
                 dataContext.catalog.InsertOnSubmit(new catalog { title = Title, author = Author });
@@ -171,7 +176,7 @@ namespace ProjetTask_2.DataLayer
             }
 
             Predicate<state> predicate = x => x.id == catalog.id;
-            
+
             if (states.Exists(predicate))
             {
                 foreach (state s in states.FindAll(predicate))
@@ -179,10 +184,10 @@ namespace ProjetTask_2.DataLayer
                     dataContext.state.DeleteOnSubmit(s);
                 }
             }
-                dataContext.catalog.DeleteOnSubmit(catalog);
-                dataContext.SubmitChanges();
-                catalogs = dataContext.GetTable<catalog>().ToList();
-            
+            dataContext.catalog.DeleteOnSubmit(catalog);
+            dataContext.SubmitChanges();
+            catalogs = dataContext.GetTable<catalog>().ToList();
+
         }
         public void newAddUser(String Name, String Surname)
         {
@@ -214,6 +219,22 @@ namespace ProjetTask_2.DataLayer
         public abstract void Borrow(String Title, String Author, String Name, String Surname);
         public abstract void Return(String Title, String Author, String Name, String Surname);
 
+    }
+
+    internal class DataAPI : AbstractDataAPI
+    {
+        public override void Borrow(string Title, string Author, string Name, string Surname)
+        {
+            newBorrow(Title, Author, Name, Surname);
+            newChangeAvailabilityState(Title, Author, true); //Looking for state w available = true to make it false
+
+        }
+
+        public override void Return(string Title, string Author, string Name, string Surname)
+        {
+            newReturn(Title, Author, Name, Surname);
+            newChangeAvailabilityState(Title, Author, false); //Looking for state w available = false to make it true
+        }
     }
 }
 

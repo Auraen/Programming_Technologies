@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using View.Services;
-using View.Stores;
-using View.ViewModels;
-
-namespace View.Commands
+﻿namespace View.ViewModels
 {
     public class NavigateCommand : CommandBase
     {

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using View.Stores;
-using View.ViewModels;
 
-namespace View.Services
+namespace View.ViewModels
 {
     public class NavigationService
     {
